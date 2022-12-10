@@ -3,8 +3,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    private float totalTime;
+
     [SerializeField] GameObject game;
-    [SerializeField] Text scoreText;
+    [SerializeField] Text timerText;
 
     private void Awake()
     {
@@ -21,7 +23,7 @@ public class UIManager : MonoBehaviour
 
         GameManager.OnGameFinsihed += (score) =>
         {
-            Instantiate(Resources.Load<Popup>("popup"), GameObject.Find("screen").transform).SetData(scoreText.text, () =>
+            Instantiate(Resources.Load<Popup>("popup"), GameObject.Find("screen").transform).SetData(timerText.text, () =>
             {
                 GameManager.Instance.RestartGame();
             });
@@ -30,6 +32,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        scoreText.text = "";
+        timerText.text = $"{GameManager.Instance.Score}";
     }
 }
