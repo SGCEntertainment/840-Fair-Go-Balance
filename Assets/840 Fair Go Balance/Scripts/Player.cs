@@ -6,14 +6,21 @@ public class Player : MonoBehaviour
     private const float rate = 0.1f;
 
     private Vector2 touchDirection;
+    private const float force = 2.0f;
+
+    private float mouseX;
+    private Rigidbody2D target;
+
+    private Vector2 distanceToTouch;
+
+    [SerializeField] Rigidbody2D lRigidbody;
+    [SerializeField] Rigidbody2D rRigidbody;
 
     private Camera Camera { get; set; }
-    private Rigidbody2D Rigidbody { get; set; }
 
     private void Awake()
     {
         Camera = Camera.main;
-        Rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -23,15 +30,24 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(Time.time > nextTime)
+        //if (Time.time > nextTime)
+        //{
+        //    nextTime = Time.time + rate;
+        //    touchDirection = new Vector2(Random.Range(-1.0f, 1.0f), 0);
+        //}
+
+        if (Input.GetMouseButton(0))
         {
-            nextTime = Time.time + rate;
-            touchDirection = new Vector2(Random.Range(-1.0f, 1.0f), 0);
+            mouseX = Input.mousePosition.x;
+            target = mouseX > Screen.width / 2 ? rRigidbody : lRigidbody;
+
+            distanceToTouch = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            distanceToTouch.Normalize();
         }
     }
 
     private void FixedUpdate()
     {
-        Rigidbody.AddForce(touchDirection);
+        target.AddForce(distanceToTouch * force);
     }
 }
