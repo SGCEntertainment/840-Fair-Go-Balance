@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        totalTime = 0;
         Score = (0,0);
 
         rootRef = Instantiate(Root, EnvironmentRef);
