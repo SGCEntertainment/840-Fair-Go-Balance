@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
 
     private Player Player { get; set; }
+    private GameObject Tree { get; set; }
     private Transform EnvironmentRef { get; set; }
 
     public static Action OnHandlePulled { get; set; } = delegate { };
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Player = Resources.Load<Player>("player");
+        Tree = Resources.Load<GameObject>("tree");
+
         EnvironmentRef = GameObject.Find("Environment").transform;
     }
 
@@ -37,6 +40,8 @@ public class GameManager : MonoBehaviour
         Score = 0;
 
         Instantiate(Player, EnvironmentRef);
+        Instantiate(Tree, EnvironmentRef);
+
         GameStarted = true;
     }
 
