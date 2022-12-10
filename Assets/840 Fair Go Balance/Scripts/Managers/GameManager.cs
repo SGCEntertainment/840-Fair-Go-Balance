@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private float GameSpeed { get; set; } = 0.5f;
     public float Score { get; set; }
 
+    private GameObject rootRef;
 
     private GameObject Root { get; set; }
     private Transform EnvironmentRef { get; set; }
@@ -36,12 +37,17 @@ public class GameManager : MonoBehaviour
     {
         Score = 0;
 
-        Instantiate(Root, EnvironmentRef);
+        rootRef = Instantiate(Root, EnvironmentRef);
         GameStarted = true;
     }
 
     public void GameOver()
     {
+        if(rootRef)
+        {
+            Destroy(rootRef);
+        }
+
         OnGameFinsihed?.Invoke(Score);
         GameStarted = false;
     }
