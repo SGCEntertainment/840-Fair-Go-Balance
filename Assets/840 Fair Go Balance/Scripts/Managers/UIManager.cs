@@ -32,6 +32,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        timerText.text = $"{GameManager.Instance.Score}";
+        timerText.text = string.Format("{0:00}:{1:00}", GameManager.Instance.Score.Item1, GameManager.Instance.Score.Item2);
     }
 }

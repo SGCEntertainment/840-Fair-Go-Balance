@@ -6,8 +6,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get => FindObjectOfType<GameManager>(); }
 
     private bool GameStarted { get; set; }
-    private float GameSpeed { get; set; } = 0.5f;
-    public float Score { get; set; }
+
+    private float totalTime;
+    public (int, int) Score { get; set; }
 
     private GameObject rootRef;
 
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
     private Transform EnvironmentRef { get; set; }
 
     public static Action OnHandlePulled { get; set; } = delegate { };
-    public static Action<float> OnGameFinsihed { get; set; } = delegate { };
+    public static Action<(int, int)> OnGameFinsihed { get; set; } = delegate { };
 
     private void Awake()
     {
@@ -30,12 +31,13 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        Score += GameSpeed * Time.deltaTime;
+        totalTime += Time.deltaTime;
+        Score = (Mathf.FloorToInt(totalTime / 60), Mathf.FloorToInt(totalTime % 60));
     }
 
     public void RestartGame()
     {
-        Score = 0;
+        Score = (0,0);
 
         rootRef = Instantiate(Root, EnvironmentRef);
         GameStarted = true;
