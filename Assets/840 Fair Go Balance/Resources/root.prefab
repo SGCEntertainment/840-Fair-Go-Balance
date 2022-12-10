@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5463162287035611229}
   - component: {fileID: 5463162287035611228}
   - component: {fileID: 5463162287035611221}
+  - component: {fileID: 8058299028393819016}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -175,7 +176,7 @@ HingeJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 8343371885874328109}
-  m_BreakForce: 100
+  m_BreakForce: 30
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.0047071218, y: -0.67782557}
@@ -186,8 +187,20 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -200
-    m_UpperAngle: 30
+    m_LowerAngle: -20
+    m_UpperAngle: 13
+--- !u!114 &8058299028393819016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5463162287035611218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ce460555fac8649aa6417b6ca638fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8343371885874328106
 GameObject:
   m_ObjectHideFlags: 0
