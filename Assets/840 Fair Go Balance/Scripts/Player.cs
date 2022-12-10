@@ -6,12 +6,10 @@ public class Player : MonoBehaviour
     private const float rate = 0.1f;
 
     private Vector2 touchDirection;
-    private const float force = 2.0f;
+    private const float force = 4.0f;
 
     private float mouseX;
     private Rigidbody2D target;
-
-    private Vector2 distanceToTouch;
 
     [SerializeField] Rigidbody2D lRigidbody;
     [SerializeField] Rigidbody2D rRigidbody;
@@ -40,14 +38,16 @@ public class Player : MonoBehaviour
         {
             mouseX = Input.mousePosition.x;
             target = mouseX > Screen.width / 2 ? rRigidbody : lRigidbody;
-
-            distanceToTouch = Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            distanceToTouch.Normalize();
         }
     }
 
     private void FixedUpdate()
     {
-        target.AddForce(distanceToTouch * force);
+        if(!target)
+        {
+            return;
+        }
+
+        target.AddForce(-target.transform.up * force);
     }
 }
